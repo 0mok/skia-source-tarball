@@ -8,7 +8,7 @@ from lib.github import GitHub
 
 
 SOURCE_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-REPO = 'zcbenz/chromium-source-tarball'
+REPO = '0mok/skia-source-tarball'
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
 
   github = GitHub(auth_token())
   for f in get_tarballs():
-    version = re.search('chromium-(.*).tar.xz', f).group(1)
+    version = re.search('skia-(.*).tar.xz', f).group(1)
     release_id = create_release_draft(github, REPO, version)
     upload_asset(github, REPO, release_id, f)
     publish_release(github, REPO, release_id)
@@ -24,7 +24,7 @@ def main():
 
 
 def get_tarballs():
-  return glob.glob('chromium-*.tar.xz')
+  return glob.glob('skia-*.tar.xz')
 
 
 def auth_token():

@@ -24,61 +24,17 @@ import tarfile
 
 
 TEST_DATA_DIRS = (
-    'chrome/common/extensions/docs',
-    'chrome/tools/test/reference_build',
-    'o3d/documentation',
-    'o3d/samples',
-    'third_party/trace-viewer/test_data',
-    'third_party/yasm/source/patched-yasm/modules/arch/lc3b/tests',
-    'third_party/yasm/source/patched-yasm/modules/arch/x86/tests',
-    'third_party/yasm/source/patched-yasm/modules/dbgfmts/dwarf2/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/bin/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/coff/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/elf/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/macho/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/rdf/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/win32/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/win64/tests',
-    'third_party/yasm/source/patched-yasm/modules/objfmts/xdf/tests',
-    'third_party/WebKit/LayoutTests',
-    'third_party/WebKit/ManualTests',
-    'third_party/WebKit/PerformanceTests',
-    'third_party/WebKit/Tools/Scripts',
 )
 
 NONESSENTIAL_DIRS = (
-    'breakpad/src/processor/testdata',
-    'chrome/browser/resources/tracing/tests',
-    'courgette/testdata',
-    'data',
-    'native_client/src/trusted/service_runtime/testdata',
-    'src/chrome/test/data',
-    'o3d/tests',
-    'ppapi/examples',
-    'ppapi/native_client/tests',
-    'third_party/angle/samples/gles2_book',
-    'third_party/findbugs',
-    'third_party/hunspell_dictionaries',
-    'third_party/hunspell/tests',
-    'third_party/lighttpd',
-    'third_party/sqlite/src/test',
-    'third_party/sqlite/test',
-    'third_party/vc_80',
-    'third_party/xdg-utils/tests',
-    'tools/gyp/test',
-    'v8/test',
 )
 
 TESTDIRS = (
-    'chrome/test/data',
-    'content/test/data',
-    'media/test/data',
-    'net/data',
 )
 
 
 def GetSourceDirectory():
-  return os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+  return os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'skia'))
 
 
 # Workaround lack of the exclude parameter in add method in python-2.4.
@@ -135,17 +91,17 @@ def main(argv):
     print 'Cannot find the src directory ' + GetSourceDirectory()
     return 1
 
-  # These two commands are from src/DEPS; please keep them in sync.
-  if subprocess.call(['python', 'build/util/lastchange.py', '-o',
-                      'build/util/LASTCHANGE'], cwd=GetSourceDirectory()) != 0:
-    print 'Could not run build/util/lastchange.py to update LASTCHANGE.'
-    return 1
-  if subprocess.call(['python', 'build/util/lastchange.py', '-s',
-                      'third_party/WebKit', '-o',
-                      'build/util/LASTCHANGE.blink'],
-                     cwd=GetSourceDirectory()) != 0:
-    print 'Could not run build/util/lastchange.py to update LASTCHANGE.blink.'
-    return 1
+  # # These two commands are from src/DEPS; please keep them in sync.
+  # if subprocess.call(['python', 'build/util/lastchange.py', '-o',
+  #                     'build/util/LASTCHANGE'], cwd=GetSourceDirectory()) != 0:
+  #   print 'Could not run build/util/lastchange.py to update LASTCHANGE.'
+  #   return 1
+  # if subprocess.call(['python', 'build/util/lastchange.py', '-s',
+  #                     'third_party/WebKit', '-o',
+  #                     'build/util/LASTCHANGE.blink'],
+  #                    cwd=GetSourceDirectory()) != 0:
+  #   print 'Could not run build/util/lastchange.py to update LASTCHANGE.blink.'
+  #   return 1
 
   output_fullname = args[0] + '.tar'
   output_basename = options.basename or os.path.basename(args[0])

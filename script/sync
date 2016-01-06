@@ -13,10 +13,11 @@ export PATH=$PATH:$SOURCE/vendor/depot_tools
 
 gclient sync --force --nohooks --with_branch_heads
 
-cd src
+cd skia
 git fetch origin --tags
 git reset --hard $VERSION
 gclient sync --force --nohooks --with_branch_heads
 
 cd "$SOURCE"
-./script/export_tarball --remove-nonessential-files chromium-$VERSION
+SKP_VERSION=$(<$SOURCE/skia/SKP_VERSION)
+./script/export_tarball --remove-nonessential-files skia-$SKP_VERSION
